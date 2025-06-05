@@ -1,0 +1,307 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Snowfun Nepal - Freezer & Outlet Tracker
+ * Global styles and theme customization
+ */
+
+:root {
+  /* Ice Cream Theme Color Palette */
+  --color-ice-blue-50: #f0f9ff;
+  --color-ice-blue-100: #e0f2fe;
+  --color-ice-blue-200: #bae6fd;
+  --color-ice-blue-300: #7dd3fc;
+  --color-ice-blue-400: #38bdf8;
+  --color-ice-blue-500: #0ea5e9;
+  --color-ice-blue-600: #0284c7;
+  --color-ice-blue-700: #0369a1;
+  --color-ice-blue-800: #075985;
+  --color-ice-blue-900: #0c4a6e;
+  
+  --color-ice-pink-50: #fdf2f8;
+  --color-ice-pink-100: #fce7f3;
+  --color-ice-pink-200: #fbcfe8;
+  --color-ice-pink-300: #f9a8d4;
+  --color-ice-pink-400: #f472b6;
+  --color-ice-pink-500: #ec4899;
+  
+  --color-snow-white: #ffffff;
+  --color-snow-off-white: #f8fafc;
+  
+  /* Shadows with ice blue tint */
+  --shadow-ice-sm: 0 1px 2px 0 rgba(12, 74, 110, 0.05);
+  --shadow-ice-md: 0 4px 6px -1px rgba(12, 74, 110, 0.1), 0 2px 4px -1px rgba(12, 74, 110, 0.06);
+  --shadow-ice-lg: 0 10px 15px -3px rgba(12, 74, 110, 0.1), 0 4px 6px -2px rgba(12, 74, 110, 0.05);
+  
+  /* Animation durations */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+}
+
+/* Base styles */
+@layer base {
+  html {
+    @apply text-gray-900;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  body {
+    @apply bg-gradient-to-b from-sky-50 to-white dark:from-slate-900 dark:to-slate-800;
+    @apply min-h-screen;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins font-semibold;
+  }
+  
+  /* Focus styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Ice cream themed buttons */
+  .btn-ice {
+    @apply px-4 py-2 rounded-md font-medium transition-all duration-300;
+    @apply bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-sm;
+    @apply hover:from-blue-600 hover:to-blue-700 hover:shadow-md;
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-ice-pink {
+    @apply bg-gradient-to-r from-pink-500 to-pink-600 text-white;
+    @apply hover:from-pink-600 hover:to-pink-700;
+    @apply focus:ring-pink-500;
+  }
+  
+  .btn-ice-outline {
+    @apply border border-blue-500 text-blue-600 bg-transparent;
+    @apply hover:bg-blue-50;
+  }
+  
+  /* Card with ice theme */
+  .ice-card {
+    @apply bg-white rounded-xl shadow-sm border border-blue-50;
+    @apply transition-all duration-300 hover:shadow-md;
+  }
+  
+  /* Nav links with ice cream theme */
+  .ice-nav-link {
+    @apply flex items-center px-3 py-2 text-base font-medium rounded-md;
+    @apply text-gray-600 hover:bg-blue-50 hover:text-blue-700;
+    @apply transition-colors duration-200;
+  }
+  
+  .ice-nav-link.active {
+    @apply bg-blue-50 text-blue-700;
+  }
+  
+  /* Form controls */
+  .ice-input {
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-md;
+    @apply focus:ring-blue-500 focus:border-blue-500;
+    @apply placeholder-gray-400;
+    @apply shadow-sm;
+  }
+  
+  .ice-select {
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-md;
+    @apply focus:ring-blue-500 focus:border-blue-500;
+    @apply shadow-sm;
+  }
+  
+  .ice-checkbox {
+    @apply h-4 w-4 rounded border-gray-300 text-blue-600;
+    @apply focus:ring-blue-500;
+  }
+  
+  .ice-radio {
+    @apply h-4 w-4 border-gray-300 text-blue-600;
+    @apply focus:ring-blue-500;
+  }
+  
+  /* Badge styles */
+  .ice-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .ice-badge-blue {
+    @apply bg-blue-100 text-blue-800;
+  }
+  
+  .ice-badge-green {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .ice-badge-amber {
+    @apply bg-amber-100 text-amber-800;
+  }
+  
+  .ice-badge-red {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .ice-badge-pink {
+    @apply bg-pink-100 text-pink-800;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  /* Gradient text */
+  .text-gradient-blue {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-sky-500;
+  }
+  
+  .text-gradient-pink {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500;
+  }
+  
+  /* Frost effect for glass-like UI elements */
+  .frost-bg {
+    @apply bg-white bg-opacity-70 backdrop-blur-lg;
+    @apply border border-white border-opacity-20;
+  }
+  
+  /* Drip animation for loading indicators */
+  .drip {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .drip::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 6px;
+    height: 10px;
+    border-radius: 0 0 3px 3px;
+    background-color: currentColor;
+    transform: translateX(-50%);
+    opacity: 0.7;
+  }
+}
+
+/* Custom animations */
+@keyframes drip {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  50% {
+    height: 10px;
+    opacity: 0.7;
+  }
+  100% {
+    height: 0;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.animate-drip::after {
+  animation: drip 2s ease-in-out infinite;
+}
+
+/* Melting animation for hover effects */
+@keyframes melt {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.05);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.hover-melt:hover {
+  animation: melt 1s ease-in-out;
+}
+
+/* Custom scrollbar for ice theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-ice-blue-50);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ice-blue-200);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ice-blue-300);
+}
+
+/* Leaflet map customizations */
+.custom-shop-marker {
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+.custom-dealer-marker {
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.3));
+}
+
+.leaflet-popup-content-wrapper {
+  @apply rounded-lg shadow-lg border border-blue-50;
+}
+
+.leaflet-popup-content {
+  @apply p-1;
+}
+
+.shop-popup h3 {
+  @apply text-blue-800 font-semibold mb-1;
+}
+
+.shop-popup p {
+  @apply text-sm text-gray-600 mb-1;
+}
+
+.shop-popup .view-shop-btn {
+  @apply mt-2 text-sm px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 w-full text-center;
+}
+
+.dealer-popup h3 {
+  @apply text-blue-800 font-semibold mb-1;
+}
+
+.dealer-popup p {
+  @apply text-sm text-gray-600 mb-1;
+}
+
+.dealer-popup .view-dealer-btn {
+  @apply mt-2 text-sm px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 w-full text-center;
+}
+
+/* Print styles */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  .ice-card {
+    @apply shadow-none border border-gray-300;
+  }
+}

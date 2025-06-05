@@ -1,0 +1,96 @@
+# Favicon & App Icons Setup – Snowfun Nepal
+
+This short note documents **how the favicon for the Snowfun Nepal – Freezer & Outlet Tracker is generated, where it lives, and how it is referenced by Next.js**.
+
+---
+
+## 1  |  Source Artwork
+
+| Asset | File | Notes |
+|-------|------|-------|
+| Official logo | `./snowfun-logo.svg` (vector) | Red `#ef4444` & Green `#22c55e` brand colours |
+| Favicon master | `./favicon-master.png` | 1024 × 1024 px transparent PNG generated from the SVG above |
+
+> The master image is kept in the same folder for quick re-export if colours or outlines change.
+
+---
+
+## 2  |  Generated Icons
+
+| Size | Purpose | File |
+|------|---------|------|
+| 16 × 16 | Classic browser tab | `favicon-16x16.png` |
+| 32 × 32 | Retina browser tab | `favicon-32x32.png` |
+| 180 × 180 | iOS / Safari pinned tab | `apple-touch-icon.png` |
+| 192 × 192 | Android Chrome maskable icon | `icon-192.png` |
+| 512 × 512 | PWA install splash | `icon-512.png` |
+| `.ico` bundle | Legacy Windows | **`favicon.ico`** ← the file this note refers to |
+
+All PNGs are losslessly optimised with **`pngquant --quality 80-100`**.  
+The ICO bundle is created with **RealFaviconGenerator** to ensure proper transparency.
+
+---
+
+## 3  |  Filesystem Location
+
+```
+apps/
+└─ web/
+   └─ public/
+      ├─ favicon.ico
+      ├─ favicon-16x16.png
+      ├─ favicon-32x32.png
+      ├─ apple-touch-icon.png
+      ├─ icon-192.png
+      ├─ icon-512.png
+      └─ snowfun-logo.svg (source)
+```
+
+The `public/` directory is exposed verbatim by Next.js; no additional import statements are needed.
+
+---
+
+## 4  |  Next.js Reference
+
+`apps/web/src/app/layout.jsx`
+
+```jsx
+export const metadata = {
+  icons: {
+    icon: '/favicon.ico',               // browsers
+    shortcut: '/favicon-16x16.png',     // win pinned sites
+    apple: '/apple-touch-icon.png',     // iOS home-screen
+  },
+  manifest: '/site.webmanifest',
+}
+```
+
+Next 13 automatically adds `<link rel="icon" ...>` tags during SSR.  
+`site.webmanifest` points Chrome/Edge to `icon-192.png` and `icon-512.png` for PWA installs.
+
+---
+
+## 5  |  Updating the Favicon
+
+1. Edit `snowfun-logo.svg` if the brand mark changes.  
+2. Export a **1024 × 1024** transparent PNG → overwrite `favicon-master.png`.  
+3. Run:
+
+```bash
+pnpm run favicon   # script in package.json calls real-favicon CLI
+```
+
+4. Commit the regenerated PNG/ICO assets – **do _not_ commit `.svg` variations** other than the canonical logo.
+
+---
+
+## 6  |  Accessibility & Contrast
+
+The small-size icons keep only the goat silhouette and word “Snow” (green circle + white goat on red text) to preserve clarity at 16 px.  
+Icons comply with WCAG AA contrast against typical browser tab backgrounds.
+
+---
+
+### TL;DR
+
+`/public/favicon.ico` is an optimised multi-resolution icon bundle automatically loaded by Next.js; regenerate it with the provided script whenever the Snowfun logo changes. 🍦
